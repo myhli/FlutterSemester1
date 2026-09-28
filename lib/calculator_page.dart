@@ -1,136 +1,77 @@
+import 'package:flutter_semester_1/components/custom_textfield.dart';
+import 'package:flutter_semester_1/components/custom_text.dart';
+import 'package:flutter_semester_1/components/custom_button.dart';
+import 'package:flutter_semester_1/controllers/kalkulator_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class CalculatorPage extends StatefulWidget {
-  const CalculatorPage({super.key});
+class CalculatorPage extends StatelessWidget {
+  CalculatorPage({super.key});
 
-  @override
-  State<CalculatorPage> createState() => _CalculatorPageState();
-}
-
-class _CalculatorPageState extends State<CalculatorPage> {
-  final TextEditingController _txt1 = TextEditingController();
-  final TextEditingController _txt2 = TextEditingController();
-  String _hasil = "0";
-
-  void _hitung(String op) {
-    double a = double.tryParse(_txt1.text) ?? 0;
-    double b = double.tryParse(_txt2.text) ?? 0;
-
-    setState(() {
-      if (op == "+") _hasil = "${a + b}";
-      if (op == "-") _hasil = "${a - b}";
-      if (op == "*") _hasil = "${a * b}";
-      if (op == "/") _hasil = b != 0 ? "${a / b}" : "Tidak bisa dibagi 0";
-    });
-  }
-
-  @override
-  void dispose() {
-    _txt1.dispose();
-    _txt2.dispose();
-    super.dispose();
-  }
+  final controller = Get.put(KalkulatorController());
+  // menyambingkan page dan controller
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController txtangka1 = TextEditingController();
+    TextEditingController txtangka2 = TextEditingController();
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Calculator page")),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: TextField(
-                controller: _txt1,
-                keyboardType: TextInputType.number,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "input number 1",
-                  hintStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
-                ),
+      appBar: AppBar(
+        title: CustomText(myText: "my kalkulator"),
+      ),
+      body: Column(
+        children: [
+          CustomTextfield(myHint: "input angka 1", txtController: txtangka1),
+          CustomTextfield(myHint: "input angka 2", txtController: txtangka2),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomButton(
+                myText: "tambah",
+                onPressed: () {
+                  controller.tambah(
+                    double.parse(txtangka1.text),
+                    double.parse(txtangka2.text),
+                  );
+                },
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: TextField(
-                controller: _txt2,
-                keyboardType: TextInputType.number,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                ),
-                decoration: const InputDecoration(
-                  hintText: "input number 2",
-                  hintStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
-                ),
+              CustomButton(
+                myText: "kurang",
+                onPressed: () {
+                  controller.kurang(
+                    double.parse(txtangka1.text),
+                    double.parse(txtangka2.text),
+                  );
+                },
               ),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () => _hitung("+"),
-                  child: const Text(
-                    "+",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () => _hitung("-"),
-                  child: const Text(
-                    "-",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () => _hitung("*"),
-                  child: const Text(
-                    "*",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () => _hitung("/"),
-                  child: const Text(
-                    "/",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 30),
-            Text(
-              "Hasil: $_hasil",
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
+              CustomButton(
+                myText: "kali",
+                onPressed: () {
+                  controller.kali(
+                    double.parse(txtangka1.text),
+                    double.parse(txtangka2.text),
+                  );
+                },
               ),
+              CustomButton(
+                myText: "bagi",
+                onPressed: () {
+                  controller.bagi(
+                    double.parse(txtangka1.text),
+                    double.parse(txtangka2.text),
+                  );
+                },
+              ),
+            ],
+          ),
+          Obx(
+            () => CustomText(
+              myText: "hasil " + controller.hasilHitung.value.toString(),
+              myColor: Colors.green,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

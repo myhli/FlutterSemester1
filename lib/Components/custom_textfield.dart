@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  final String hint;
+class CustomTextfield extends StatelessWidget {
+  // variabel yang diperlukan
+  final String myHint;
   final TextEditingController txtController;
-  final bool isPassword;
+  final Color textColor;
 
-  const CustomTextField({
+  const CustomTextfield({
     super.key,
-    required this.hint,
+    required this.myHint,
     required this.txtController,
-    this.isPassword = false, 
+    this.textColor = Colors.green,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: txtController,
-      obscureText: isPassword,
+      style: TextStyle(color: textColor),
       decoration: InputDecoration(
-        hintText: hint,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+        hint: Text(
+          myHint,
+          style: TextStyle(color: textColor),
         ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
   }
