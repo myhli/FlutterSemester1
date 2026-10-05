@@ -22,45 +22,61 @@ class CalculatorPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          CustomTextfield(myHint: "input angka 1", txtController: txtangka1),
-          CustomTextfield(myHint: "input angka 2", txtController: txtangka2),
+          CustomTextfield(
+            myHint: "input angka 1",
+            txtController: txtangka1,
+            isNumeric: true,
+          ),
+          CustomTextfield(
+            myHint: "input angka 2",
+            txtController: txtangka2,
+            isNumeric: true,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               CustomButton(
                 myText: "tambah",
                 onPressed: () {
-                  controller.tambah(
-                    double.parse(txtangka1.text),
-                    double.parse(txtangka2.text),
-                  );
+                  if (controller.cekInput(txtangka1.text, txtangka2.text)) {
+                    controller.tambah(
+                      double.parse(txtangka1.text),
+                      double.parse(txtangka2.text),
+                    );
+                  }
                 },
               ),
               CustomButton(
                 myText: "kurang",
                 onPressed: () {
-                  controller.kurang(
-                    double.parse(txtangka1.text),
-                    double.parse(txtangka2.text),
-                  );
+                  if (controller.cekInput(txtangka1.text, txtangka2.text)) {
+                    controller.kurang(
+                      double.parse(txtangka1.text),
+                      double.parse(txtangka2.text),
+                    );
+                  }
                 },
               ),
               CustomButton(
                 myText: "kali",
                 onPressed: () {
-                  controller.kali(
-                    double.parse(txtangka1.text),
-                    double.parse(txtangka2.text),
-                  );
+                  if (controller.cekInput(txtangka1.text, txtangka2.text)) {
+                    controller.kali(
+                      double.parse(txtangka1.text),
+                      double.parse(txtangka2.text),
+                    );
+                  }
                 },
               ),
               CustomButton(
                 myText: "bagi",
                 onPressed: () {
-                  controller.bagi(
-                    double.parse(txtangka1.text),
-                    double.parse(txtangka2.text),
-                  );
+                  if (controller.cekInput(txtangka1.text, txtangka2.text, true)) {
+                    controller.bagi(
+                      double.parse(txtangka1.text),
+                      double.parse(txtangka2.text),
+                    );
+                  }
                 },
               ),
             ],
