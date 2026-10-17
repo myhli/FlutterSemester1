@@ -24,48 +24,35 @@ class ConfirmRegistrationPage extends StatelessWidget {
             CustomText(
               myText: "Username: ${controller.username}",
               fontSize: 18,
-              myColor: Colors.black87,
             ),
             const SizedBox(height: 10),
             CustomText(
               myText: "Nama Lengkap: ${controller.nama_lengkap}",
               fontSize: 18,
-              myColor: Colors.black87,
             ),
             const SizedBox(height: 10),
             CustomText(
               myText: "Password: ${controller.password}",
               fontSize: 18,
-              myColor: Colors.black87,
             ),
             const SizedBox(height: 10),
-            CustomText(
-              myText: "Email: ${controller.email}",
-              fontSize: 18,
-              myColor: Colors.black87,
-            ),
+            CustomText(myText: "Email: ${controller.email}", fontSize: 18),
             const SizedBox(height: 10),
             CustomText(
               myText: "Nomor WhatsApp: ${controller.nomorwa}",
               fontSize: 18,
-              myColor: Colors.black87,
             ),
             const SizedBox(height: 10),
             CustomText(
               myText: "Jenis Kelamin: ${controller.jenis_kelamin}",
               fontSize: 18,
-              myColor: Colors.black87,
             ),
             const SizedBox(height: 10),
-            CustomText(
-              myText: "Agama: ${controller.agama}",
-              fontSize: 18,
-              myColor: Colors.black87,
-            ),
+            CustomText(myText: "Agama: ${controller.agama}", fontSize: 18),
             const SizedBox(height: 24),
             Center(
               child: CustomButton(
-                myText: "ok",
+                myText: "Confirm my Registration",
                 onPressed: () {
                   Get.back();
                 },
