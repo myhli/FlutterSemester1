@@ -2,7 +2,7 @@ import 'package:flutter_semester_1/models/makanan_model.dart';
 import 'package:get/get.dart';
 
 class ListMakananController extends GetxController {
-  List<MakananModel> dataMakanan = [
+  var dataMakanan = <MakananModel>[
     MakananModel(
       namaMakanan: "Horog-Horog",
       harga: "5.000",
@@ -51,5 +51,5 @@ class ListMakananController extends GetxController {
       deskripsi: "Tusukan daging ayam fillet empuk yang dibakar polos tanpa kecap, disajikan bersama kucuran perasan jeruk nipis segar dan cocolan ulekan sambal cabai rawit gurih pedas menggigit.",
       gambarPath: "assets/images/satetaichan.png",
     ),
-  ];
+  ].obs;
 }
